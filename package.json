@@ -1,0 +1,16 @@
+
+{
+  "name": "shikhi-kids",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Offline educational learning app for children",
+  "scripts": {
+    "build": "mkdir -p www && cp index.html style.css app.js www/"
+  },
+  "dependencies": {
+    "@capacitor/core": "^7.4.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.3"
+  }
+}
