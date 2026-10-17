@@ -255,3 +255,45 @@ body.dark-mode footer {
     font-size: 14px;
   }
 }
+#child-profile {
+  background: #fff;
+  padding: 18px;
+  margin: 18px 0;
+  border-radius: 18px;
+  box-shadow: 0 4px 12px #00000012;
+}
+
+#child-profile label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+  color: #444;
+}
+
+#child-profile input,
+#child-profile select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin-top: 6px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+#child-profile button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 16px;
+  border: none;
+  border-radius: 12px;
+  background: #ff8c42;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#savedChildProfile {
+  margin-top: 16px;
+  line-height: 1.8;
+}
