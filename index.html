@@ -17,52 +17,18 @@
   <main>
     <div class="top-bar">
       <h2>আজ কী শিখবে? 🎈</h2>
-      <button class="settings-button" onclick="openSettings()">
-        ⚙️ Settings
-      </button>
+
+      <div class="top-actions">
+        <button class="profile-button" onclick="openChildProfile()"
+          aria-label="বাচ্চার প্রোফাইল">👶</button>
+
+        <button class="settings-button" onclick="openSettings()">
+          ⚙️ Settings
+        </button>
+      </div>
     </div>
 
     <section class="subjects" id="subjects">
-      <section id="child-profile">
-  <h2>👶 আমার প্রোফাইল</h2>
-
-  <label>বাচ্চার নাম:</label>
-  <input id="childName" type="text" placeholder="নাম লেখো">
-
-  <label>জন্মতারিখ (ঐচ্ছিক):</label>
-  <input id="childDob" type="date" onchange="calculateChildAge()">
-
-  <p id="childAge">বয়স: নির্বাচন করো</p>
-
-  <label>জন্মতারিখ না দিলে বয়স নির্বাচন করো:</label>
-  <select id="childAgeSelect">
-    <option value="">বয়স নির্বাচন করো</option>
-    <option value="3">৩ বছর</option>
-    <option value="4">৪ বছর</option>
-    <option value="5">৫ বছর</option>
-    <option value="6">৬ বছর</option>
-    <option value="7">৭ বছর</option>
-    <option value="8">৮ বছর</option>
-  </select>
-
-  <label>বাচ্চা:</label>
-  <select id="childGender">
-    <option value="">নির্বাচন করো</option>
-    <option value="ছেলে">ছেলে</option>
-    <option value="মেয়ে">মেয়ে</option>
-  </select>
-
-  <label>গ্যালারি থেকে ছবি:</label>
-  <input id="childPhoto" type="file" accept="image/*"
-    onchange="previewChildPhoto(event)">
-
-  <img id="childPhotoPreview" alt="বাচ্চার ছবি"
-    style="display:none;width:100px;height:100px;object-fit:cover;border-radius:50%;">
-
-  <button onclick="saveChildProfile()">💾 তথ্য সংরক্ষণ করো</button>
-
-  <div id="savedChildProfile"></div>
-      </section>
       <button onclick="showLesson('bangla')">📖 বাংলা</button>
       <button onclick="showLesson('english')">🔤 English</button>
       <button onclick="showLesson('math')">🔢 গণিত</button>
@@ -74,6 +40,51 @@
     <section id="lesson">
       <h2>স্বাগতম ছোট্ট বন্ধু! 🥰</h2>
       <p>শেখার জন্য উপরের যেকোনো একটি বাটনে চাপ দাও।</p>
+    </section>
+
+    <section id="childProfilePage" hidden>
+      <button class="back-button" onclick="closeChildProfile()">
+        ⬅️ হোম পেজে ফিরে যাও
+      </button>
+
+      <h2>👶 প্রোফাইল</h2>
+
+      <label for="childName">বাচ্চার নাম:</label>
+      <input id="childName" type="text" placeholder="নাম লেখো">
+
+      <label for="childDob">জন্মতারিখ (ঐচ্ছিক):</label>
+      <input id="childDob" type="date" onchange="calculateChildAge()">
+
+      <p id="childAge">বয়স: নির্বাচন করুন</p>
+
+      <label for="childAgeSelect">জন্মতারিখ অথবা বয়স নির্বাচন করুন:</label>
+      <select id="childAgeSelect">
+        <option value="">বয়স নির্বাচন করুন</option>
+        <option value="3">৩ বছর</option>
+        <option value="4">৪ বছর</option>
+        <option value="5">৫ বছর</option>
+        <option value="6">৬ বছর</option>
+        <option value="7">৭ বছর</option>
+        <option value="8">৮ বছর</option>
+      </select>
+
+      <label for="childGender">বাচ্চা:</label>
+      <select id="childGender">
+        <option value="">নির্বাচন করুন</option>
+        <option value="ছেলে">ছেলে</option>
+        <option value="মেয়ে">মেয়ে</option>
+      </select>
+
+      <label for="childPhoto">গ্যালারি থেকে ছবি:</label>
+      <input id="childPhoto" type="file" accept="image/*"
+        onchange="previewChildPhoto(event)">
+
+      <img id="childPhotoPreview" alt="বাচ্চার ছবি"
+        style="display:none;width:100px;height:100px;object-fit:cover;border-radius:50%;">
+
+      <button onclick="saveChildProfile()">💾 তথ্য সংরক্ষণ করো</button>
+
+      <div id="savedChildProfile"></div>
     </section>
   </main>
 
@@ -89,11 +100,38 @@
   <script src="app.js"></script>
 
   <script>
-    function openSettings() {
-      const lesson = document.getElementById("lesson");
+    function openChildProfile() {
       document.getElementById("subjects").style.display = "none";
+      document.getElementById("lesson").style.display = "none";
+      document.getElementById("childProfilePage").hidden = false;
 
-      lesson.innerHTML = `
+      if (typeof editChildProfile === "function") {
+        editChildProfile();
+      }
+
+      document.getElementById("childProfilePage")
+        .scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function closeChildProfile() {
+      document.getElementById("childProfilePage").hidden = true;
+      document.getElementById("subjects").style.display = "";
+      document.getElementById("lesson").style.display = "";
+
+      document.getElementById("lesson").innerHTML = `
+        <h2>স্বাগতম ছোট্ট বন্ধু! 🥰</h2>
+        <p>শেখার জন্য উপরের যেকোনো একটি বাটনে চাপ দাও।</p>
+      `;
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function openSettings() {
+      document.getElementById("childProfilePage").hidden = true;
+      document.getElementById("subjects").style.display = "none";
+      document.getElementById("lesson").style.display = "block";
+
+      document.getElementById("lesson").innerHTML = `
         <button class="back-button" onclick="closeSettings()">
           ⬅️ ফিরে যাও
         </button>
@@ -139,6 +177,7 @@
 
     function closeSettings() {
       document.getElementById("subjects").style.display = "grid";
+      document.getElementById("lesson").style.display = "block";
       document.getElementById("lesson").innerHTML = `
         <h2>স্বাগতম ছোট্ট বন্ধু! 🥰</h2>
         <p>শেখার জন্য উপরের যেকোনো একটি বাটনে চাপ দাও।</p>
@@ -181,9 +220,7 @@
         <p>ভবিষ্যতে নতুন ফিচার, বিজ্ঞাপন, অ্যানালিটিক্স বা অনলাইন পরিষেবা যুক্ত হলে এই নীতি আপডেট করতে হবে।</p>
         <h3>অভিভাবকদের সহায়তা</h3>
         <p>গোপনীয়তা সম্পর্কে প্রশ্ন থাকলে যোগাযোগ করুন:</p>
-        <p><a href="mailto:support.shikhi@gmail.com?subject=Privacy%20Policy">
-          support.shikhi@gmail.com
-        </a></p>
+        <p><a href="mailto:support.shikhi@gmail.com?subject=Privacy%20Policy">support.shikhi@gmail.com</a></p>
       `);
     }
 
@@ -204,9 +241,7 @@
         <p><strong>Location:</strong> West Bengal, India</p>
         <p>Developer of Shikhi Kids</p>
         <p><strong>Support:</strong></p>
-        <p><a href="mailto:support.shikhi@gmail.com">
-          support.shikhi@gmail.com
-        </a></p>
+        <p><a href="mailto:support.shikhi@gmail.com">support.shikhi@gmail.com</a></p>
       `);
     }
 
