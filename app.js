@@ -35,10 +35,43 @@ bangla: {
   `
 },
 
-    english: {
-      title: "🔤 English Alphabet",
-      content: "A B C D E F G<br><br>H I J K L M N<br><br>O P Q R S T U V W X Y Z"
-    },
+    
+english: {
+  title: "🔤 Let's Learn English!",
+  content: `
+    <h3>🌈 Learn the Alphabet</h3>
+    <p style="font-size:26px; line-height:2;">
+      A B C D E F G<br>
+      H I J K L M N<br>
+      O P Q R S T U V W X Y Z
+    </p>
+
+    <h3>🍎 Learn Words</h3>
+    <p style="font-size:22px; line-height:2;">
+      A — Apple 🍎<br>
+      B — Ball ⚽<br>
+      C — Cat 🐱<br>
+      D — Dog 🐶<br>
+      E — Elephant 🐘<br>
+      F — Fish 🐟<br>
+      G — Grapes 🍇
+    </p>
+
+    <h3>🔢 Learn Numbers</h3>
+    <p style="font-size:24px;">
+      One — 1<br>
+      Two — 2<br>
+      Three — 3<br>
+      Four — 4<br>
+      Five — 5
+    </p>
+
+    <h3>✏️ Practice</h3>
+    <p>Say aloud: A for Apple, B for Ball, C for Cat.</p>
+  `
+},
+
+ 
     math: {
       title: "🔢 চলো গণিত শিখি",
       content: "১ + ১ = ২<br><br>২ + ২ = ৪<br><br>৩ + ২ = ৫"
