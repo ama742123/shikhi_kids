@@ -23,6 +23,46 @@
     </div>
 
     <section class="subjects" id="subjects">
+      <section id="child-profile">
+  <h2>👶 আমার প্রোফাইল</h2>
+
+  <label>বাচ্চার নাম:</label>
+  <input id="childName" type="text" placeholder="নাম লেখো">
+
+  <label>জন্মতারিখ (ঐচ্ছিক):</label>
+  <input id="childDob" type="date" onchange="calculateChildAge()">
+
+  <p id="childAge">বয়স: নির্বাচন করো</p>
+
+  <label>জন্মতারিখ না দিলে বয়স নির্বাচন করো:</label>
+  <select id="childAgeSelect">
+    <option value="">বয়স নির্বাচন করো</option>
+    <option value="3">৩ বছর</option>
+    <option value="4">৪ বছর</option>
+    <option value="5">৫ বছর</option>
+    <option value="6">৬ বছর</option>
+    <option value="7">৭ বছর</option>
+    <option value="8">৮ বছর</option>
+  </select>
+
+  <label>বাচ্চা:</label>
+  <select id="childGender">
+    <option value="">নির্বাচন করো</option>
+    <option value="ছেলে">ছেলে</option>
+    <option value="মেয়ে">মেয়ে</option>
+  </select>
+
+  <label>গ্যালারি থেকে ছবি:</label>
+  <input id="childPhoto" type="file" accept="image/*"
+    onchange="previewChildPhoto(event)">
+
+  <img id="childPhotoPreview" alt="বাচ্চার ছবি"
+    style="display:none;width:100px;height:100px;object-fit:cover;border-radius:50%;">
+
+  <button onclick="saveChildProfile()">💾 তথ্য সংরক্ষণ করো</button>
+
+  <div id="savedChildProfile"></div>
+      </section>
       <button onclick="showLesson('bangla')">📖 বাংলা</button>
       <button onclick="showLesson('english')">🔤 English</button>
       <button onclick="showLesson('math')">🔢 গণিত</button>
