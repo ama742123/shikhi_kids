@@ -367,12 +367,119 @@ function showLesson(subject) {
     }
   };
 
-  const selected = lessons[subject];
+    const selected = lessons[subject];
 
-  if (selected && lesson) {
-    lesson.innerHTML =
-      "<h2>" + selected.title + "</h2>" + selected.content;
+  if (!selected || !lesson) return;
+
+  // গল্পের জন্য আলাদা তালিকা তৈরি
+  if (subject === "story") {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(
+      selected.content,
+      "text/html"
+    );
+
+    const stories = [];
+    let currentStory = null;
+
+    Array.from(doc.body.children).forEach((element) => {
+      if (
+        element.tagName === "H3" &&
+        element.textContent.includes("গল্প")
+      ) {
+        currentStory = {
+          title: element.textContent,
+          content: ""
+        };
+
+        stories.push(currentStory);
+      } else if (currentStory) {
+        currentStory.content += element.outerHTML;
+      }
+    });
+
+    window.shikhiKidsStories = stories;
+
+    lesson.innerHTML = `
+      <h2>📚 গল্পের জাদুর জগৎ</h2>
+      <p>তোমার পছন্দের গল্পের নামের ওপর চাপ দাও। 🥰</p>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        ${stories.map((story, index) => `
+          <button
+            onclick="openShikhiStory(${index})"
+            style="
+              width:100%;
+              text-align:left;
+              padding:16px;
+              font-size:18px;
+              border-radius:14px;
+              border:2px solid #ffd4e5;
+              background:#fff3f8;
+              color:#333;
+              cursor:pointer;
+            "
+          >
+            ${story.title}
+            <span style="float:right;">❯</span>
+          </button>
+        `).join("")}
+      </div>
+    `;
+
+    return;
   }
+
+  // অন্য বিষয়গুলো আগের মতোই চলবে
+  lesson.innerHTML =
+    "<h2>" + selected.title + "</h2>" + selected.content;
+}
+
+function openShikhiStory(index) {
+  const lesson = document.getElementById("lesson");
+  const stories = window.shikhiKidsStories;
+
+  if (!lesson || !stories || !stories[index]) return;
+
+  const story = stories[index];
+
+  lesson.innerHTML = `
+    <button
+      onclick="showLesson('story')"
+      style="
+        padding:12px 16px;
+        margin-bottom:16px;
+        border:0;
+        border-radius:12px;
+        font-size:16px;
+        background:#ffe0ed;
+        cursor:pointer;
+      "
+    >
+      ⬅️ গল্পের তালিকায় ফিরে যাও
+    </button>
+
+    <h2>${story.title}</h2>
+    <div style="font-size:19px; line-height:1.9;">
+      ${story.content}
+    </div>
+
+    <button
+      onclick="showLesson('story')"
+      style="
+        padding:12px 16px;
+        margin-top:16px;
+        border:0;
+        border-radius:12px;
+        font-size:16px;
+        background:#ffe0ed;
+        cursor:pointer;
+      "
+    >
+      ⬅️ সব গল্প দেখো
+    </button>
+  `;
+
+  lesson.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function checkAnswer(answer) {
