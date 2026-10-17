@@ -512,3 +512,180 @@ function quizAnswer(button, answer, resultId) {
     result.textContent = "😊 আবার চেষ্টা করো!";
   }
 }
+let childPhotoData = "";
+
+function calculateChildAge() {
+  const dob = document.getElementById("childDob").value;
+  const ageText = document.getElementById("childAge");
+  const ageSelect = document.getElementById("childAgeSelect");
+
+  if (!dob) {
+    ageText.textContent = "বয়স: নির্বাচন করো";
+    return;
+  }
+
+  const birth = new Date(dob + "T00:00:00");
+  const today = new Date();
+
+  if (birth > today) {
+    ageText.textContent = "সঠিক জন্মতারিখ দাও।";
+    return;
+  }
+
+  let years = today.getFullYear() - birth.getFullYear();
+  let months = today.getMonth() - birth.getMonth();
+
+  if (today.getDate() < birth.getDate()) months--;
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  ageText.textContent = `বয়স: ${years} বছর ${months} মাস`;
+  ageSelect.value = "";
+}
+
+function previewChildPhoto(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith("image/")) {
+    alert("একটি ছবি নির্বাচন করো।");
+    return;
+  }
+
+  if (file.size > 2 * 1024 * 1024) {
+    alert("২ মেগাবাইটের চেয়ে ছোট ছবি নির্বাচন করো।");
+    event.target.value = "";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function () {
+    childPhotoData = reader.result;
+
+    const preview = document.getElementById("childPhotoPreview");
+    preview.src = childPhotoData;
+    preview.style.display = "block";
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function saveChildProfile() {
+  const name = document.getElementById("childName").value.trim();
+  const dob = document.getElementById("childDob").value;
+  const selectedAge = document.getElementById("childAgeSelect").value;
+  const gender = document.getElementById("childGender").value;
+
+  if (!name) {
+    alert("বাচ্চার নাম লেখো।");
+    return;
+  }
+
+  if (dob && new Date(dob + "T00:00:00") > new Date()) {
+    alert("সঠিক জন্মতারিখ দাও।");
+    return;
+  }
+
+  if (!dob && !selectedAge) {
+    alert("জন্মতারিখ অথবা বয়স নির্বাচন করো।");
+    return;
+  }
+
+  let age = selectedAge ? selectedAge + " বছর" : "";
+
+  if (dob) {
+    const birth = new Date(dob + "T00:00:00");
+    const today = new Date();
+
+    let years = today.getFullYear() - birth.getFullYear();
+    let months = today.getMonth() - birth.getMonth();
+
+    if (today.getDate() < birth.getDate()) months--;
+
+    if (months < 0) {
+      years--;
+      months += 12;
+    }
+
+    age = `${years} বছর ${months} মাস`;
+  }
+
+  const profile = {
+    name,
+    dob,
+    age,
+    gender,
+    photo: childPhotoData
+  };
+
+  try {
+    localStorage.setItem("shikhiKidsChildProfile", JSON.stringify(profile));
+    showChildProfile(profile);
+    alert("বাচ্চার প্রোফাইল সংরক্ষণ হয়েছে!");
+  } catch (error) {
+    alert("তথ্য সংরক্ষণ করা যায়নি। ছবিটি ছোট করে আবার চেষ্টা করো।");
+  }
+}
+
+function showChildProfile(profile) {
+  const container = document.getElementById("savedChildProfile");
+
+  container.innerHTML = `
+    <h3>🥰 সংরক্ষিত প্রোফাইল</h3>
+    ${profile.photo
+      ? `<img src="${profile.photo}" alt="প্রোফাইল ছবি"
+           style="width:90px;height:90px;object-fit:cover;border-radius:50%;">`
+      : ""}
+    <p>নাম: ${escapeProfileText(profile.name)}</p>
+    <p>বয়স: ${escapeProfileText(profile.age)}</p>
+    <p>পরিচয়: ${escapeProfileText(profile.gender || "নির্বাচন করা হয়নি")}</p>
+    <button onclick="editChildProfile()">✏️ প্রোফাইল পরিবর্তন</button>
+  `;
+}
+
+function escapeProfileText(value) {
+  return String(value || "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function editChildProfile() {
+  const profile = JSON.parse(
+    localStorage.getItem("shikhiKidsChildProfile") || "null"
+  );
+
+  if (!profile) return;
+
+  document.getElementById("childName").value = profile.name || "";
+  document.getElementById("childDob").value = profile.dob || "";
+  document.getElementById("childGender").value = profile.gender || "";
+  document.getElementById("childAgeSelect").value =
+    profile.dob ? "" : (profile.age || "").replace(" বছর", "");
+
+  childPhotoData = profile.photo || "";
+
+  if (childPhotoData) {
+    const preview = document.getElementById("childPhotoPreview");
+    preview.src = childPhotoData;
+    preview.style.display = "block";
+  }
+
+  calculateChildAge();
+}
+
+(function restoreChildProfile() {
+  try {
+    const saved = localStorage.getItem("shikhiKidsChildProfile");
+    if (saved) showChildProfile(JSON.parse(saved));
+  } catch (error) {
+    console.log("প্রোফাইল পড়তে সমস্যা হয়েছে।");
+  }
+})();
