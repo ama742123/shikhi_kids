@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -9,32 +10,25 @@
 </head>
 <body>
   <header>
-   <h1>📚 Shikhi Kids</h1>
+    <h1>📚 Shikhi Kids</h1>
     <p>খেলতে খেলতে শিখি!</p>
   </header>
 
   <main>
-    <h2>আজ কী শিখবে? 🎈</h2>
+    <div class="top-bar">
+      <h2>আজ কী শিখবে? 🎈</h2>
+      <button class="settings-button" onclick="openSettings()">
+        ⚙️ Settings
+      </button>
+    </div>
 
-    <section class="subjects">
-      <button onclick="showLesson('bangla')">
-        📖 বাংলা
-      </button>
-      <button onclick="showLesson('english')">
-        🔤 English
-      </button>
-      <button onclick="showLesson('math')">
-        🔢 গণিত
-      </button>
-      <button onclick="showLesson('story')">
-        📚 গল্প
-      </button>
-      <button onclick="showLesson('writing')">
-        ✍️ লেখা
-      </button>
-      <button onclick="showLesson('games')">
-        🎮 গেম
-      </button>
+    <section class="subjects" id="subjects">
+      <button onclick="showLesson('bangla')">📖 বাংলা</button>
+      <button onclick="showLesson('english')">🔤 English</button>
+      <button onclick="showLesson('math')">🔢 গণিত</button>
+      <button onclick="showLesson('story')">📚 গল্প</button>
+      <button onclick="showLesson('writing')">✍️ লেখা</button>
+      <button onclick="showLesson('games')">🎮 গেম</button>
     </section>
 
     <section id="lesson">
@@ -45,14 +39,143 @@
 
   <footer>
     <p>
-  📧 অভিভাবকদের সহায়তা:
-  <a href="mailto:support.shikhi@gmail.com?subject=Shikhi%20Kids%20Support">
-    support.shikhi@gmail.com
-  </a>
+      📧 অভিভাবকদের সহায়তা:
+      <a href="mailto:support.shikhi@gmail.com?subject=Shikhi%20Kids%20Support">
+        support.shikhi@gmail.com
+      </a>
     </p>
   </footer>
 
   <script src="app.js"></script>
+
+  <script>
+    function openSettings() {
+      const lesson = document.getElementById("lesson");
+      document.getElementById("subjects").style.display = "none";
+
+      lesson.innerHTML = `
+        <button class="back-button" onclick="closeSettings()">
+          ⬅️ ফিরে যাও
+        </button>
+
+        <h2>⚙️ Settings</h2>
+        <p>Shikhi Kids নিজের মতো সাজিয়ে নাও!</p>
+
+        <div class="setting-card">
+          <span>🌙 Dark Mode</span>
+          <label class="switch">
+            <input type="checkbox" id="darkModeToggle"
+              onchange="toggleDarkMode(this.checked)">
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+
+        <button class="setting-link" onclick="openParentSection()">
+          👨‍👩‍👧 Parent Section <span>›</span>
+        </button>
+
+        <button class="setting-link" onclick="openPrivacyPolicy()">
+          🔒 Privacy Policy <span>›</span>
+        </button>
+
+        <button class="setting-link" onclick="openAboutApp()">
+          📱 About App <span>›</span>
+        </button>
+
+        <button class="setting-link" onclick="openAboutDeveloper()">
+          👨‍💻 About Developer <span>›</span>
+        </button>
+
+        <a class="setting-link email-link"
+          href="mailto:support.shikhi@gmail.com?subject=Shikhi%20Kids%20Support">
+          📧 Support Email
+          <span>support.shikhi@gmail.com</span>
+        </a>
+      `;
+
+      document.getElementById("darkModeToggle").checked =
+        document.body.classList.contains("dark-mode");
+    }
+
+    function closeSettings() {
+      document.getElementById("subjects").style.display = "grid";
+      document.getElementById("lesson").innerHTML = `
+        <h2>স্বাগতম ছোট্ট বন্ধু! 🥰</h2>
+        <p>শেখার জন্য উপরের যেকোনো একটি বাটনে চাপ দাও।</p>
+      `;
+    }
+
+    function toggleDarkMode(enabled) {
+      document.body.classList.toggle("dark-mode", enabled);
+      localStorage.setItem("shikhiKidsDarkMode", enabled ? "on" : "off");
+
+      document.querySelector('meta[name="theme-color"]').content =
+        enabled ? "#202334" : "#fff3d6";
+    }
+
+    function openSettingsPageContent(title, content) {
+      document.getElementById("lesson").innerHTML = `
+        <button class="back-button" onclick="openSettings()">
+          ⬅️ Settings-এ ফিরে যাও
+        </button>
+        <h2>${title}</h2>
+        ${content}
+      `;
+    }
+
+    function openParentSection() {
+      openSettingsPageContent("👨‍👩‍👧 Parent Section", `
+        <p>শিশুর শেখার সময় অভিভাবকেরা পাশে থাকুন।</p>
+        <p>এই অ্যাপে বাংলা, English, গণিত, গল্প, লেখা ও শিক্ষামূলক গেম রয়েছে।</p>
+        <p>শিশুর অনলাইন নিরাপত্তা ও গোপনীয়তার দিকে খেয়াল রাখুন।</p>
+        <p>সহায়তার জন্য নিচের ইমেইলে যোগাযোগ করুন:</p>
+        <p><a href="mailto:support.shikhi@gmail.com">support.shikhi@gmail.com</a></p>
+      `);
+    }
+
+    function openPrivacyPolicy() {
+      openSettingsPageContent("🔒 Privacy Policy", `
+        <h3>শিশুদের গোপনীয়তা</h3>
+        <p>Shikhi Kids শিশুদের শেখার জন্য তৈরি একটি শিক্ষামূলক অ্যাপ।</p>
+        <p>এই অ্যাপের বর্তমান সংস্করণে ব্যক্তিগত তথ্য সংগ্রহ বা কোনো সার্ভারে পাঠানোর ব্যবস্থা যোগ করা হয়নি।</p>
+        <p>ভবিষ্যতে নতুন ফিচার, বিজ্ঞাপন, অ্যানালিটিক্স বা অনলাইন পরিষেবা যুক্ত হলে এই নীতি আপডেট করতে হবে।</p>
+        <h3>অভিভাবকদের সহায়তা</h3>
+        <p>গোপনীয়তা সম্পর্কে প্রশ্ন থাকলে যোগাযোগ করুন:</p>
+        <p><a href="mailto:support.shikhi@gmail.com?subject=Privacy%20Policy">
+          support.shikhi@gmail.com
+        </a></p>
+      `);
+    }
+
+    function openAboutApp() {
+      openSettingsPageContent("📱 About Shikhi Kids", `
+        <h3>📚 Shikhi Kids</h3>
+        <p>খেলতে খেলতে শিখি!</p>
+        <p>৩–৮ বছর বয়সী শিশুদের বাংলা, English ও গণিত শেখার সহায়ক অ্যাপ।</p>
+        <p>এখানে রয়েছে বর্ণমালা, গল্প, লেখা অনুশীলন ও শিক্ষামূলক গেম।</p>
+        <p><strong>App Version:</strong> 1.0.0</p>
+      `);
+    }
+
+    function openAboutDeveloper() {
+      openSettingsPageContent("👨‍💻 About Developer", `
+        <h3>Shikhi Kids Developer</h3>
+        <p><strong>Name:</strong> aman</p>
+        <p><strong>Location:</strong> West Bengal, India</p>
+        <p>Developer of Shikhi Kids</p>
+        <p><strong>Support:</strong></p>
+        <p><a href="mailto:support.shikhi@gmail.com">
+          support.shikhi@gmail.com
+        </a></p>
+      `);
+    }
+
+    (function restoreTheme() {
+      const savedTheme = localStorage.getItem("shikhiKidsDarkMode");
+      document.body.classList.toggle("dark-mode", savedTheme === "on");
+      document.querySelector('meta[name="theme-color"]').content =
+        savedTheme === "on" ? "#202334" : "#fff3d6";
+    })();
+  </script>
 </body>
 </html>
-  
