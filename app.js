@@ -121,10 +121,38 @@ math: {
       title: "📚 ছোট্ট গল্প",
       content: "এক ছিল ছোট্ট খরগোশ। সে প্রতিদিন মন দিয়ে পড়াশোনা করত এবং সবার সঙ্গে ভালো ব্যবহার করত।"
     },
-    writing: {
-      title: "✍️ লেখা অনুশীলন",
-      content: "আজ লেখো:<br><br>অ অ অ<br><br>A A A<br><br>১ ১ ১"
-    },
+    
+writing: {
+  title: "✍️ চলো লিখতে শিখি",
+  content: `
+    <h3>🌸 বাংলা লেখা</h3>
+    <p>নিচের বর্ণগুলো দেখে খাতায় লেখো।</p>
+    <div style="font-size:30px; line-height:2; background:#fff3f8; padding:12px; border-radius:12px;">
+      অ　আ　ই　ঈ<br>
+      ক　খ　গ　ঘ<br>
+      আম　কলম　মাছ
+    </div>
+
+    <h3>🔤 English Writing</h3>
+    <p>দেখে দেখে বড় হাতের অক্ষর লেখো।</p>
+    <div style="font-size:30px; line-height:2; background:#eef6ff; padding:12px; border-radius:12px;">
+      A　B　C　D<br>
+      E　F　G　H<br>
+      CAT　BAT　DOG
+    </div>
+
+    <h3>🔢 সংখ্যা লেখা</h3>
+    <p>সংখ্যাগুলো দেখে খাতায় লেখো।</p>
+    <div style="font-size:30px; line-height:2; background:#f0fff0; padding:12px; border-radius:12px;">
+      ১　২　৩　৪　৫<br>
+      ৬　৭　৮　৯　১০
+    </div>
+
+    <h3>⭐ আজকের কাজ</h3>
+    <p>খাতায় অ, A এবং ১ পাঁচবার করে লেখো।</p>
+  `
+},
+
     
 games: {
   title: "🎮 চলো খেলতে খেলতে শিখি",
