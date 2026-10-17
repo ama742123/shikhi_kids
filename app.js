@@ -177,3 +177,15 @@ function checkAnswer(answer) {
         : "😊 আবার চেষ্টা করো!";
   }
 }
+
+function quizAnswer(button, answer, resultId) {
+  const result = document.getElementById(resultId);
+
+  if (!result) return;
+
+  if (answer === "correct") {
+    result.textContent = "🎉 সাবাশ! সঠিক উত্তর!";
+  } else {
+    result.textContent = "😊 আবার চেষ্টা করো!";
+  }
+}
