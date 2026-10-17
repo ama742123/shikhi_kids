@@ -1,10 +1,18 @@
 
+/* ==================================
+   SHIKHI KIDS — MAIN DESIGN
+================================== */
+
 * {
   box-sizing: border-box;
 }
 
 :root {
   color-scheme: light;
+}
+
+[hidden] {
+  display: none !important;
 }
 
 body {
@@ -16,22 +24,68 @@ body {
   transition: background 0.25s, color 0.25s;
 }
 
+/* Header */
+
 header {
+  position: relative;
   background: linear-gradient(135deg, #ff9ecb, #a8e6ff);
-  padding: 28px 12px;
+  padding: 18px 12px 28px;
   border-radius: 0 0 28px 28px;
 }
 
 header h1 {
   font-size: 30px;
   color: #663399;
-  margin: 0 0 10px;
+  margin: 10px 0;
 }
 
 header p {
   font-size: 18px;
   margin: 0;
 }
+
+/* Top-right buttons */
+
+.top-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 12px;
+}
+
+.profile-button,
+.settings-top-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  min-height: 46px;
+  padding: 10px 14px;
+  border: 2px solid #ffffffb8;
+  border-radius: 15px;
+  background: #ffffffed;
+  color: #6339a8;
+  font-size: 21px;
+  font-weight: bold;
+  box-shadow: 0 3px 10px #00000012;
+}
+
+.profile-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 25px;
+}
+
+.profile-button:active,
+.settings-top-button:active {
+  transform: scale(0.95);
+}
+
+/* Main layout */
 
 main {
   padding: 20px 14px;
@@ -46,7 +100,10 @@ main h2 {
   margin: 0 auto;
 }
 
+/* Settings button */
+
 .settings-button {
+  display: block;
   width: 100%;
   max-width: 500px;
   margin: 10px auto;
@@ -54,6 +111,8 @@ main h2 {
   color: #6339a8;
   border: 2px solid #eadfff;
 }
+
+/* Subject buttons */
 
 .subjects {
   display: grid;
@@ -74,13 +133,22 @@ button {
   box-shadow: 0 4px 10px #00000015;
   cursor: pointer;
   overflow-wrap: anywhere;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button:active {
   transform: scale(0.97);
 }
 
+button:focus-visible {
+  outline: 3px solid #ffbf47;
+  outline-offset: 3px;
+}
+
+/* Lesson section */
+
 #lesson {
+  width: 100%;
   max-width: 500px;
   margin: 20px auto;
   padding: 22px 14px;
@@ -91,9 +159,17 @@ button:active {
   text-align: center;
 }
 
+#lesson h2 {
+  color: #6a45b8;
+}
+
 #lesson h3 {
   margin-top: 24px;
   color: #6339a8;
+}
+
+#lesson p {
+  overflow-wrap: anywhere;
 }
 
 #lesson a,
@@ -108,6 +184,8 @@ footer a {
   background: #e9e0ff;
   color: #51328c;
 }
+
+/* Settings cards and links */
 
 .setting-card,
 .setting-link {
@@ -142,7 +220,8 @@ footer a {
   color: #155fc1;
 }
 
-/* Dark Mode switch */
+/* Dark mode switch */
+
 .switch {
   position: relative;
   display: inline-block;
@@ -192,6 +271,8 @@ footer a {
   outline-offset: 3px;
 }
 
+/* Footer */
+
 footer {
   padding: 18px 10px;
   font-size: 13px;
@@ -199,62 +280,144 @@ footer {
   overflow-wrap: anywhere;
 }
 
-/* Dark theme */
-body.dark-mode {
-  background: #171923;
-  color: #f2f2f7;
-  color-scheme: dark;
+/* ==================================
+   CHILD PROFILE PAGE
+================================== */
+
+#childProfilePage {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 24px;
+  padding: 22px 16px;
+  border: 2px solid #f4d9ff;
+  border-radius: 24px;
+  background: linear-gradient(180deg, #fff, #fff5fb);
+  box-shadow: 0 5px 18px #00000010;
+  text-align: center;
 }
 
-body.dark-mode header {
-  background: linear-gradient(135deg, #48315f, #234b60);
+#childProfilePage h2 {
+  color: #7845b8;
+  margin: 8px 0 12px;
 }
 
-body.dark-mode header h1,
-body.dark-mode main h2,
-body.dark-mode #lesson h3 {
-  color: #e0caff;
+#childProfilePage p {
+  line-height: 1.7;
 }
 
-body.dark-mode .settings-button,
-body.dark-mode .subjects button,
-body.dark-mode .setting-card,
-body.dark-mode .setting-link {
-  background: #292d3d;
-  color: #f2f2f7;
-  border-color: #42465b;
+#childProfilePage label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #55416e;
+  text-align: left;
 }
 
-body.dark-mode #lesson {
-  background: #242c32;
-  color: #f2f2f7;
+#childProfilePage input,
+#childProfilePage select {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px;
+  margin: 0;
+  border: 2px solid #eadfff;
+  border-radius: 12px;
+  background: #fff;
+  color: #333;
+  font-family: inherit;
+  font-size: 16px;
 }
 
-body.dark-mode .back-button {
-  background: #403653;
+#childProfilePage input:focus,
+#childProfilePage select:focus {
+  outline: 3px solid #ead7ff;
+  border-color: #a77be5;
+}
+
+#childProfilePage input[type="file"] {
+  padding: 9px;
+  font-size: 14px;
+}
+
+#childAge {
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 12px;
+  background: #f0e8ff;
+  color: #57358e;
+  font-weight: bold;
+  text-align: center;
+}
+
+#childPhotoPreview {
+  display: none;
+  width: 120px;
+  height: 120px;
+  margin: 16px auto;
+  border: 4px solid #ffcae1;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff;
+}
+
+#savedChildProfile {
+  margin-top: 22px;
+  padding: 16px 12px;
+  border-radius: 16px;
+  background: #f0fff4;
+  color: #333;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+#savedChildProfile h3 {
+  color: #37835c;
+}
+
+#savedChildProfile img {
+  display: block;
+  margin: 12px auto;
+}
+
+#savedChildProfile button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 13px;
+  background: #e8ddff;
+  color: #57358e;
+}
+
+#childProfilePage button {
+  min-height: 48px;
+}
+
+#childProfilePage button[onclick="saveChildProfile()"] {
+  display: block;
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ff8cba, #b68bff);
   color: #fff;
+  font-size: 17px;
+  box-shadow: 0 4px 12px #b68bff40;
 }
 
-body.dark-mode #lesson a,
-body.dark-mode footer a {
-  color: #9dc7ff;
+#childProfilePage button[onclick="closeChildProfile()"] {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 13px;
+  background: #eee8f7;
+  color: #563c7a;
 }
 
-body.dark-mode footer {
-  color: #c0c2ce;
-}
+/* Old profile selector support, if still present */
 
-@media (max-width: 360px) {
-  main {
-    padding: 16px 10px;
-  }
-
-  .setting-link,
-  .setting-card {
-    padding: 14px 10px;
-    font-size: 14px;
-  }
-}
 #child-profile {
   background: #fff;
   padding: 18px;
@@ -293,7 +456,156 @@ body.dark-mode footer {
   font-weight: bold;
 }
 
-#savedChildProfile {
-  margin-top: 16px;
-  line-height: 1.8;
+/* ==================================
+   DARK THEME
+================================== */
+
+body.dark-mode {
+  background: #171923;
+  color: #f2f2f7;
+  color-scheme: dark;
+}
+
+body.dark-mode header {
+  background: linear-gradient(135deg, #48315f, #234b60);
+}
+
+body.dark-mode header h1,
+body.dark-mode main h2,
+body.dark-mode #lesson h3,
+body.dark-mode #lesson h2 {
+  color: #e0caff;
+}
+
+body.dark-mode .settings-button,
+body.dark-mode .subjects button,
+body.dark-mode .setting-card,
+body.dark-mode .setting-link {
+  background: #292d3d;
+  color: #f2f2f7;
+  border-color: #42465b;
+}
+
+body.dark-mode .profile-button,
+body.dark-mode .settings-top-button {
+  background: #292d3d;
+  color: #f2f2f7;
+  border-color: #55516b;
+}
+
+body.dark-mode #lesson {
+  background: #242c32;
+  color: #f2f2f7;
+}
+
+body.dark-mode .back-button {
+  background: #403653;
+  color: #fff;
+}
+
+body.dark-mode #lesson a,
+body.dark-mode footer a {
+  color: #9dc7ff;
+}
+
+body.dark-mode footer {
+  color: #c0c2ce;
+}
+
+body.dark-mode #childProfilePage {
+  background: linear-gradient(180deg, #292638, #24202f);
+  border-color: #514363;
+  color: #f2f2f7;
+}
+
+body.dark-mode #childProfilePage h2 {
+  color: #e0caff;
+}
+
+body.dark-mode #childProfilePage label {
+  color: #e4d8f5;
+}
+
+body.dark-mode #childProfilePage input,
+body.dark-mode #childProfilePage select {
+  background: #292d3d;
+  color: #f2f2f7;
+  border-color: #514363;
+}
+
+body.dark-mode #childAge {
+  background: #403653;
+  color: #f2eaff;
+}
+
+body.dark-mode #savedChildProfile {
+  background: #24382f;
+  color: #f2f2f7;
+}
+
+body.dark-mode #savedChildProfile h3 {
+  color: #a7e9bd;
+}
+
+body.dark-mode #savedChildProfile button {
+  background: #403653;
+  color: #fff;
+}
+
+body.dark-mode #childProfilePage button[onclick="closeChildProfile()"] {
+  background: #403653;
+  color: #fff;
+}
+
+body.dark-mode #child-profile {
+  background: #292d3d;
+  color: #f2f2f7;
+}
+
+body.dark-mode #child-profile label {
+  color: #f2f2f7;
+}
+
+body.dark-mode #child-profile input,
+body.dark-mode #child-profile select {
+  background: #171923;
+  color: #f2f2f7;
+  border-color: #514363;
+}
+
+/* ==================================
+   SMALL MOBILE SCREENS
+================================== */
+
+@media (max-width: 360px) {
+  header h1 {
+    font-size: 26px;
+  }
+
+  header p {
+    font-size: 16px;
+  }
+
+  main {
+    padding: 16px 10px;
+  }
+
+  .subjects {
+    gap: 10px;
+  }
+
+  .subjects button {
+    padding: 15px 8px;
+    font-size: 15px;
+  }
+
+  .setting-link,
+  .setting-card {
+    padding: 14px 10px;
+    font-size: 14px;
+  }
+
+  #childProfilePage {
+    padding: 16px 12px;
+  }
 }
