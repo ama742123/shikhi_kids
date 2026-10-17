@@ -125,10 +125,37 @@ math: {
       title: "✍️ লেখা অনুশীলন",
       content: "আজ লেখো:<br><br>অ অ অ<br><br>A A A<br><br>১ ১ ১"
     },
-    games: {
-      title: "🎮 মজার প্রশ্ন",
-      content: "প্রশ্ন: ইংরেজি বর্ণমালার প্রথম অক্ষর কোনটি?<br><br><button onclick=\"checkAnswer('A')\">A</button> <button onclick=\"checkAnswer('B')\">B</button><p id=\"answer\"></p>"
-    }
+    
+games: {
+  title: "🎮 চলো খেলতে খেলতে শিখি",
+  content: `
+    <h3>🌈 বাংলা কুইজ</h3>
+    <p>১. আম শব্দের প্রথম অক্ষর কোনটি?</p>
+    <button onclick="quizAnswer(this, 'wrong', 'bangla1')">ই</button>
+    <button onclick="quizAnswer(this, 'correct', 'bangla1')">আ</button>
+    <button onclick="quizAnswer(this, 'wrong', 'bangla1')">উ</button>
+    <p id="bangla1"></p>
+
+    <hr>
+
+    <h3>🔤 English Quiz</h3>
+    <p>2. Which letter comes first?</p>
+    <button onclick="quizAnswer(this, 'correct', 'english1')">A</button>
+    <button onclick="quizAnswer(this, 'wrong', 'english1')">B</button>
+    <button onclick="quizAnswer(this, 'wrong', 'english1')">C</button>
+    <p id="english1"></p>
+
+    <hr>
+
+    <h3>🔢 গণিত কুইজ</h3>
+    <p>৩. ২ + ৩ = কত?</p>
+    <button onclick="quizAnswer(this, 'wrong', 'math1')">৪</button>
+    <button onclick="quizAnswer(this, 'correct', 'math1')">৫</button>
+    <button onclick="quizAnswer(this, 'wrong', 'math1')">৬</button>
+    <p id="math1"></p>
+  `
+},
+
   };
 
   const selected = lessons[subject];
