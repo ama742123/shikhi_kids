@@ -2,10 +2,39 @@ function showLesson(subject) {
   const lesson = document.getElementById("lesson");
 
   const lessons = {
-    bangla: {
-      title: "📖 বাংলা বর্ণমালা",
-      content: "অ আ ই ঈ উ ঊ ঋ এ ঐ ও ঔ<br><br>ক খ গ ঘ ঙ চ ছ জ ঝ ঞ"
-    },
+    
+bangla: {
+  title: "📖 চলো বাংলা বর্ণমালা শিখি",
+  content: `
+    <h3>🌸 স্বরবর্ণ</h3>
+    <p style="font-size:24px; line-height:2;">
+      অ আ ই ঈ উ ঊ ঋ এ ঐ ও ঔ
+    </p>
+
+    <h3>🌼 ব্যঞ্জনবর্ণ</h3>
+    <p style="font-size:24px; line-height:2;">
+      ক খ গ ঘ ঙ চ ছ জ ঝ ঞ<br>
+      ট ঠ ড ঢ ণ ত থ দ ধ ন<br>
+      প ফ ব ভ ম য র ল শ ষ স হ<br>
+      ড় ঢ় য় ৎ ং ঃ ঁ
+    </p>
+
+    <h3>🍎 বর্ণ দিয়ে শব্দ শিখি</h3>
+    <p style="font-size:22px; line-height:2;">
+      অ — অজগর 🐍<br>
+      আ — আম 🥭<br>
+      ই — ইঁদুর 🐭<br>
+      উ — উট 🐪<br>
+      ক — কলা 🍌<br>
+      গ — গরু 🐄<br>
+      ম — মাছ 🐟
+    </p>
+
+    <h3>✏️ অনুশীলন</h3>
+    <p>নিজে নিজে বলো: অ — অজগর, আ — আম, ক — কলা।</p>
+  `
+},
+
     english: {
       title: "🔤 English Alphabet",
       content: "A B C D E F G<br><br>H I J K L M N<br><br>O P Q R S T U V W X Y Z"
