@@ -4,254 +4,374 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#fff3d6">
-  <title>Shikhi Kids</title>
+  <meta name="theme-color" content="#6C63FF">
+  <meta name="description" content="Shikhi Kids — শিশুদের বাংলা, ইংরেজি ও গণিত শেখার আনন্দময় জগৎ">
+  <title>Shikhi Kids - শিশুদের শেখার জগৎ</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>📚 Shikhi Kids</h1>
-    <p>খেলতে খেলতে শিখি!</p>
+
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-logo" aria-hidden="true">📚</div>
+      <div>
+        <h1>Shikhi Kids</h1>
+        <p>শিখি খেলতে খেলতে!</p>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <div class="top-bar">
-      <h2>আজ কী শিখবে? 🎈</h2>
+  <main class="app-container">
+
+    <!-- Home top bar -->
+    <div class="top-bar" id="topBar">
+      <div>
+        <h2>হ্যালো ছোট্ট বন্ধু! 👋</h2>
+        <p>আজ কী শিখতে চাও?</p>
+      </div>
 
       <div class="top-actions">
-        <button class="profile-button" onclick="openChildProfile()"
-          aria-label="বাচ্চার প্রোফাইল">👶</button>
+        <button type="button" class="icon-button"
+          onclick="openChildProfile()" aria-label="শিশুর প্রোফাইল">
+          👧
+        </button>
 
-        <button class="settings-button" onclick="openSettings()">
-          ⚙️ Settings
+        <button type="button" class="icon-button"
+          onclick="openSettings()" aria-label="সেটিংস">
+          ⚙️
         </button>
       </div>
     </div>
 
-    <section class="subjects" id="subjects">
-      <button onclick="showLesson('bangla')">📖 বাংলা</button>
-      <button onclick="showLesson('rhymes')">🎵 বাংলা ছড়া</button>
-      <button onclick="showLesson('english')">🔤 English</button>
-      <button onclick="showLesson('math')">🔢 গণিত</button>
-      <button onclick="showLesson('story')">📚 গল্প</button>
-      <button onclick="showLesson('writing')">✍️ লেখা</button>
-      <button onclick="showLesson('games')">🎮 গেম</button>
+    <!-- Subject buttons -->
+    <section id="subjects" class="subjects-section">
+      <h2>📚 শেখার বিষয় বেছে নাও</h2>
+
+      <div class="subject-grid">
+        <button type="button" class="subject-card"
+          onclick="showLesson('bangla')">
+          <span class="subject-icon">🔤</span>
+          <span>বাংলা</span>
+          <small>বর্ণমালা ও শব্দ</small>
+        </button>
+
+        <button type="button" class="subject-card"
+          onclick="showLesson('rhymes')">
+          <span class="subject-icon">🎵</span>
+          <span>ছড়া ও গান</span>
+          <small>শুনে শুনে শিখি</small>
+        </button>
+
+        <button type="button" class="subject-card"
+          onclick="showLesson('english')">
+          <span class="subject-icon">🔠</span>
+          <span>English</span>
+          <small>Letters and words</small>
+        </button>
+
+        <button type="button" class="subject-card"
+          onclick="showLesson('math')">
+          <span class="subject-icon">🔢</span>
+          <span>গণিত</span>
+          <small>সংখ্যা ও হিসাব</small>
+        </button>
+
+        <button type="button" class="subject-card"
+          onclick="showLesson('story')">
+          <span class="subject-icon">📖</span>
+          <span>গল্প</span>
+          <small>মজার গল্প পড়ি</small>
+        </button>
+
+        <button type="button" class="subject-card"
+          onclick="showLesson('writing')">
+          <span class="subject-icon">✍️</span>
+          <span>লেখার অনুশীলন</span>
+          <small>লিখতে শিখি</small>
+        </button>
+
+        <button type="button" class="subject-card"
+          onclick="showLesson('games')">
+          <span class="subject-icon">🎮</span>
+          <span>শিক্ষামূলক গেম</span>
+          <small>খেলতে খেলতে শিখি</small>
+        </button>
+      </div>
     </section>
 
-    <section id="lesson">
-      <h2>স্বাগতম ছোট্ট বন্ধু! 🥰</h2>
-      <p>শেখার জন্য উপরের যেকোনো একটি বাটনে চাপ দাও।</p>
+    <!-- Lesson and settings content appear here -->
+    <section id="lesson" class="lesson-section" aria-live="polite">
+      <div class="welcome-card">
+        <h2>🌈 শেখার মজার জগতে স্বাগতম!</h2>
+        <p>একটি বিষয় বেছে নিয়ে শেখা শুরু করো।</p>
+      </div>
     </section>
 
+    <!-- Child profile page -->
     <section id="childProfilePage" hidden>
-      <button class="back-button" onclick="closeChildProfile()">
-        ⬅️ হোম পেজে ফিরে যাও
-      </button>
+      <div class="page-heading">
+        <h2>👧 শিশুর প্রোফাইল</h2>
+        <button type="button" onclick="closeChildProfile()">
+          ← ফিরে যাও
+        </button>
+      </div>
 
-      <h2>👶 প্রোফাইল</h2>
+      <form id="childProfileForm" onsubmit="saveChildProfile(event)">
+        <label for="childName">শিশুর নাম</label>
+        <input
+          type="text"
+          id="childName"
+          name="childName"
+          placeholder="শিশুর নাম লিখো"
+          maxlength="50"
+          required
+        >
 
-      <label for="childName">বাচ্চার নাম:</label>
-      <input id="childName" type="text" placeholder="নাম লেখো">
+        <label for="childDob">জন্মতারিখ</label>
+        <input
+          type="date"
+          id="childDob"
+          name="childDob"
+          onchange="calculateChildAge()"
+        >
 
-      <label for="childDob">জন্মতারিখ (ঐচ্ছিক):</label>
-      <input id="childDob" type="date" onchange="calculateChildAge()">
+        <label for="childAge">বয়স</label>
+        <input
+          type="number"
+          id="childAge"
+          name="childAge"
+          min="3"
+          max="8"
+          placeholder="বয়স"
+          readonly
+        >
 
-      <p id="childAge">বয়স: নির্বাচন করুন</p>
+        <label for="childAgeSelect">অথবা বয়স বেছে নাও</label>
+        <select id="childAgeSelect" name="childAgeSelect"
+          onchange="document.getElementById('childAge').value=this.value">
+          <option value="">বয়স বেছে নাও</option>
+          <option value="3">৩ বছর</option>
+          <option value="4">৪ বছর</option>
+          <option value="5">৫ বছর</option>
+          <option value="6">৬ বছর</option>
+          <option value="7">৭ বছর</option>
+          <option value="8">৮ বছর</option>
+        </select>
 
-      <label for="childAgeSelect">জন্মতারিখ অথবা বয়স নির্বাচন করুন:</label>
-      <select id="childAgeSelect">
-        <option value="">বয়স নির্বাচন করুন</option>
-        <option value="3">৩ বছর</option>
-        <option value="4">৪ বছর</option>
-        <option value="5">৫ বছর</option>
-        <option value="6">৬ বছর</option>
-        <option value="7">৭ বছর</option>
-        <option value="8">৮ বছর</option>
-      </select>
+        <label for="childGender">লিঙ্গ (ঐচ্ছিক)</label>
+        <select id="childGender" name="childGender">
+          <option value="">বেছে নাও</option>
+          <option value="ছেলে">ছেলে</option>
+          <option value="মেয়ে">মেয়ে</option>
+          <option value="অন্যান্য">অন্যান্য</option>
+          <option value="বলতে চাই না">বলতে চাই না</option>
+        </select>
 
-      <label for="childGender">বাচ্চা:</label>
-      <select id="childGender">
-        <option value="">নির্বাচন করুন</option>
-        <option value="ছেলে">ছেলে</option>
-        <option value="মেয়ে">মেয়ে</option>
-      </select>
+        <label for="childPhoto">প্রোফাইল ছবি (ঐচ্ছিক)</label>
+        <input
+          type="file"
+          id="childPhoto"
+          name="childPhoto"
+          accept="image/*"
+          onchange="previewChildPhoto(event)"
+        >
 
-      <label for="childPhoto">গ্যালারি থেকে ছবি:</label>
-      <input id="childPhoto" type="file" accept="image/*"
-        onchange="previewChildPhoto(event)">
+        <div class="profile-photo-container">
+          <img
+            id="childPhotoPreview"
+            alt="শিশুর প্রোফাইল ছবির প্রিভিউ"
+            hidden
+            style="max-width:120px;max-height:120px;object-fit:cover;border-radius:50%;"
+          >
+        </div>
 
-      <img id="childPhotoPreview" alt="বাচ্চার ছবি"
-        style="display:none;width:100px;height:100px;object-fit:cover;border-radius:50%;">
+        <button type="submit" class="primary-button">
+          💾 প্রোফাইল সংরক্ষণ করো
+        </button>
+      </form>
 
-      <button onclick="saveChildProfile()">💾 তথ্য সংরক্ষণ করো</button>
-
-      <div id="savedChildProfile"></div>
+      <div id="savedChildProfile" aria-live="polite"></div>
     </section>
+
   </main>
 
-  <footer>
+  <footer class="app-footer">
+    <p>💖 Shikhi Kids — শিখি আনন্দের সঙ্গে</p>
     <p>
-      📧 অভিভাবকদের সহায়তা:
-      <a href="mailto:support.shikhi@gmail.com?subject=Shikhi%20Kids%20Support">
+      সাহায্যের জন্য:
+      <a href="mailto:support.shikhi@gmail.com">
         support.shikhi@gmail.com
       </a>
     </p>
   </footer>
 
+  <!-- Main app JavaScript -->
   <script src="app.js"></script>
 
+  <!-- Settings and navigation -->
   <script>
-    function openChildProfile() {
-      document.getElementById("subjects").style.display = "none";
-      document.getElementById("lesson").style.display = "none";
-      document.getElementById("childProfilePage").hidden = false;
+    const HOME_CONTENT = `
+      <div class="welcome-card">
+        <h2>🌈 শেখার মজার জগতে স্বাগতম!</h2>
+        <p>একটি বিষয় বেছে নিয়ে শেখা শুরু করো।</p>
+      </div>
+    `;
 
-      if (typeof editChildProfile === "function") {
-        editChildProfile();
-      }
-
-      document.getElementById("childProfilePage")
-        .scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    function closeChildProfile() {
+    function showHomeScreen() {
+      document.getElementById("topBar").hidden = false;
+      document.getElementById("subjects").hidden = false;
+      document.getElementById("lesson").hidden = false;
       document.getElementById("childProfilePage").hidden = true;
-      document.getElementById("subjects").style.display = "";
-      document.getElementById("lesson").style.display = "";
-
-      document.getElementById("lesson").innerHTML = `
-        <h2>স্বাগতম ছোট্ট বন্ধু! 🥰</h2>
-        <p>শেখার জন্য উপরের যেকোনো একটি বাটনে চাপ দাও।</p>
-      `;
-
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      document.getElementById("lesson").innerHTML = HOME_CONTENT;
     }
 
     function openSettings() {
+      document.getElementById("topBar").hidden = true;
+      document.getElementById("subjects").hidden = true;
       document.getElementById("childProfilePage").hidden = true;
-      document.getElementById("subjects").style.display = "none";
-      document.getElementById("lesson").style.display = "block";
 
-      document.getElementById("lesson").innerHTML = `
-        <button class="back-button" onclick="closeSettings()">
-          ⬅️ ফিরে যাও
-        </button>
+      const lesson = document.getElementById("lesson");
+      lesson.hidden = false;
 
-        <h2>⚙️ Settings</h2>
-        <p>Shikhi Kids নিজের মতো সাজিয়ে নাও!</p>
+      lesson.innerHTML = `
+        <div class="settings-page">
+          <h2>⚙️ সেটিংস</h2>
 
-        <div class="setting-card">
-          <span>🌙 Dark Mode</span>
-          <label class="switch">
-            <input type="checkbox" id="darkModeToggle"
-              onchange="toggleDarkMode(this.checked)">
-            <span class="switch-slider"></span>
-          </label>
+          <div class="settings-item">
+            <label for="toggleDarkMode">🌙 ডার্ক মোড</label>
+            <input
+              type="checkbox"
+              id="toggleDarkMode"
+              onchange="toggleDarkMode(this.checked)"
+            >
+          </div>
+
+          <button type="button" class="settings-button"
+            onclick="openParentSection()">
+            👨‍👩‍👧 প্যারেন্ট সেকশন
+          </button>
+
+          <button type="button" class="settings-button"
+            onclick="openPrivacyPolicy()">
+            🔒 গোপনীয়তা নীতি
+          </button>
+
+          <button type="button" class="settings-button"
+            onclick="openAboutApp()">
+            📱 অ্যাপ সম্পর্কে
+          </button>
+
+          <button type="button" class="settings-button"
+            onclick="openAboutDeveloper()">
+            👨‍💻 ডেভেলপার সম্পর্কে
+          </button>
+
+          <button type="button" class="settings-button"
+            onclick="window.location.href='mailto:support.shikhi@gmail.com'">
+            ✉️ যোগাযোগ
+          </button>
+
+          <button type="button" class="primary-button"
+            onclick="showHomeScreen()">
+            ← হোমে ফিরে যাও
+          </button>
         </div>
-
-        <button class="setting-link" onclick="openParentSection()">
-          👨‍👩‍👧 Parent Section <span>›</span>
-        </button>
-
-        <button class="setting-link" onclick="openPrivacyPolicy()">
-          🔒 Privacy Policy <span>›</span>
-        </button>
-
-        <button class="setting-link" onclick="openAboutApp()">
-          📱 About App <span>›</span>
-        </button>
-
-        <button class="setting-link" onclick="openAboutDeveloper()">
-          👨‍💻 About Developer <span>›</span>
-        </button>
-
-        <a class="setting-link email-link"
-          href="mailto:support.shikhi@gmail.com?subject=Shikhi%20Kids%20Support">
-          📧 Support Email
-          <span>support.shikhi@gmail.com</span>
-        </a>
       `;
 
-      document.getElementById("darkModeToggle").checked =
-        document.body.classList.contains("dark-mode");
+      const darkMode = localStorage.getItem("shikhiKidsDarkMode") === "true";
+      document.body.classList.toggle("dark-mode", darkMode);
+      document.getElementById("toggleDarkMode").checked = darkMode;
     }
 
     function closeSettings() {
-      document.getElementById("subjects").style.display = "grid";
-      document.getElementById("lesson").style.display = "block";
-      document.getElementById("lesson").innerHTML = `
-        <h2>স্বাগতম ছোট্ট বন্ধু! 🥰</h2>
-        <p>শেখার জন্য উপরের যেকোনো একটি বাটনে চাপ দাও।</p>
-      `;
+      showHomeScreen();
     }
 
     function toggleDarkMode(enabled) {
       document.body.classList.toggle("dark-mode", enabled);
-      localStorage.setItem("shikhiKidsDarkMode", enabled ? "on" : "off");
+      localStorage.setItem("shikhiKidsDarkMode", String(enabled));
 
-      document.querySelector('meta[name="theme-color"]').content =
-        enabled ? "#202334" : "#fff3d6";
+      const themeColor = document.querySelector('meta[name="theme-color"]');
+      if (themeColor) {
+        themeColor.setAttribute("content", enabled ? "#202124" : "#6C63FF");
+      }
     }
 
     function openSettingsPageContent(title, content) {
-      document.getElementById("lesson").innerHTML = `
-        <button class="back-button" onclick="openSettings()">
-          ⬅️ Settings-এ ফিরে যাও
-        </button>
-        <h2>${title}</h2>
-        ${content}
+      const lesson = document.getElementById("lesson");
+
+      lesson.innerHTML = `
+        <div class="settings-page">
+          <h2>${title}</h2>
+          <div class="settings-content">${content}</div>
+          <button type="button" class="primary-button"
+            onclick="openSettings()">
+            ← সেটিংসে ফিরে যাও
+          </button>
+        </div>
       `;
     }
 
     function openParentSection() {
-      openSettingsPageContent("👨‍👩‍👧 Parent Section", `
-        <p>শিশুর শেখার সময় অভিভাবকেরা পাশে থাকুন।</p>
-        <p>এই অ্যাপে বাংলা, English, গণিত, গল্প, লেখা ও শিক্ষামূলক গেম রয়েছে।</p>
-        <p>শিশুর অনলাইন নিরাপত্তা ও গোপনীয়তার দিকে খেয়াল রাখুন।</p>
-        <p>সহায়তার জন্য নিচের ইমেইলে যোগাযোগ করুন:</p>
-        <p><a href="mailto:support.shikhi@gmail.com">support.shikhi@gmail.com</a></p>
-      `);
+      openSettingsPageContent(
+        "👨‍👩‍👧 প্যারেন্ট সেকশন",
+        `
+          <p>শিশুকে শেখার সময় সাহায্য করুন এবং তার অগ্রগতি দেখুন।</p>
+          <p>শিশুর নিরাপত্তার জন্য ব্যক্তিগত তথ্য অনলাইনে শেয়ার করবেন না।</p>
+          <p>এই সংস্করণে অনলাইন অভিভাবক যাচাইকরণ বা ক্লাউড সিঙ্ক নেই।</p>
+        `
+      );
     }
 
     function openPrivacyPolicy() {
-      openSettingsPageContent("🔒 Privacy Policy", `
-        <h3>শিশুদের গোপনীয়তা</h3>
-        <p>Shikhi Kids শিশুদের শেখার জন্য তৈরি একটি শিক্ষামূলক অ্যাপ।</p>
-        <p>এই অ্যাপের বর্তমান সংস্করণে ব্যক্তিগত তথ্য সংগ্রহ বা কোনো সার্ভারে পাঠানোর ব্যবস্থা যোগ করা হয়নি।</p>
-        <p>ভবিষ্যতে নতুন ফিচার, বিজ্ঞাপন, অ্যানালিটিক্স বা অনলাইন পরিষেবা যুক্ত হলে এই নীতি আপডেট করতে হবে।</p>
-        <h3>অভিভাবকদের সহায়তা</h3>
-        <p>গোপনীয়তা সম্পর্কে প্রশ্ন থাকলে যোগাযোগ করুন:</p>
-        <p><a href="mailto:support.shikhi@gmail.com?subject=Privacy%20Policy">support.shikhi@gmail.com</a></p>
-      `);
+      openSettingsPageContent(
+        "🔒 গোপনীয়তা নীতি",
+        `
+          <p>Shikhi Kids শিশুদের শেখার জন্য তৈরি একটি শিক্ষামূলক অ্যাপ।</p>
+          <p>প্রোফাইলের তথ্য এই ডিভাইসে সংরক্ষিত হতে পারে।</p>
+          <p>প্রোফাইল ছবি বেছে নিলেই তা ইন্টারনেটে আপলোড হয় না।</p>
+          <p>অন্য কোনো সেবা যুক্ত করা হলে তার তথ্য সংগ্রহের নিয়ম আলাদাভাবে জানাতে হবে।</p>
+        `
+      );
     }
 
     function openAboutApp() {
-      openSettingsPageContent("📱 About Shikhi Kids", `
-        <h3>📚 Shikhi Kids</h3>
-        <p>খেলতে খেলতে শিখি!</p>
-        <p>৩–৮ বছর বয়সী শিশুদের বাংলা, English ও গণিত শেখার সহায়ক অ্যাপ।</p>
-        <p>এখানে রয়েছে বর্ণমালা, গল্প, লেখা অনুশীলন ও শিক্ষামূলক গেম।</p>
-        <p><strong>App Version:</strong> 1.0.0</p>
-      `);
+      openSettingsPageContent(
+        "📱 Shikhi Kids সম্পর্কে",
+        `
+          <p>Shikhi Kids শিশুদের আনন্দের সঙ্গে শেখার একটি অ্যাপ।</p>
+          <p>বিষয়: বাংলা, ইংরেজি, গণিত, ছড়া, গল্প, লেখার অনুশীলন ও গেম।</p>
+          <p>বয়স: ৩–৮ বছর।</p>
+        `
+      );
     }
 
     function openAboutDeveloper() {
-      openSettingsPageContent("👨‍💻 About Developer", `
-        <h3>Shikhi Kids Developer</h3>
-        <p><strong>Name:</strong> aman</p>
-        <p><strong>Location:</strong> West Bengal, India</p>
-        <p>Developer of Shikhi Kids</p>
-        <p><strong>Support:</strong></p>
-        <p><a href="mailto:support.shikhi@gmail.com">support.shikhi@gmail.com</a></p>
-      `);
+      openSettingsPageContent(
+        "👨‍💻 ডেভেলপার সম্পর্কে",
+        `
+          <p><strong>নাম:</strong> aman</p>
+          <p><strong>অবস্থান:</strong> West Bengal, India</p>
+          <p><strong>সহায়তা:</strong>
+            <a href="mailto:support.shikhi@gmail.com">
+              support.shikhi@gmail.com
+            </a>
+          </p>
+        `
+      );
     }
 
+    // Restore the saved appearance preference.
     (function restoreTheme() {
-      const savedTheme = localStorage.getItem("shikhiKidsDarkMode");
-      document.body.classList.toggle("dark-mode", savedTheme === "on");
-      document.querySelector('meta[name="theme-color"]').content =
-        savedTheme === "on" ? "#202334" : "#fff3d6";
+      const enabled = localStorage.getItem("shikhiKidsDarkMode") === "true";
+      document.body.classList.toggle("dark-mode", enabled);
+
+      const themeColor = document.querySelector('meta[name="theme-color"]');
+      if (themeColor) {
+        themeColor.setAttribute("content", enabled ? "#202124" : "#6C63FF");
+      }
     })();
   </script>
+
 </body>
 </html>
