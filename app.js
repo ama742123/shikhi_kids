@@ -1,3 +1,6 @@
+// ======================================
+// SHIKHI KIDS — বাংলা ছড়া
+// ======================================
 
 const banglaRhymes = [
   { title: "হাট্টিমাটিম টিম", file: "hattimatim-tim.mp3" },
@@ -12,6 +15,9 @@ const banglaRhymes = [
   { title: "আয় ছেলেরা আয় মেয়েরা", file: "ay-chelera-ay-meyera.mp3" }
 ];
 
+// ======================================
+// SHIKHI KIDS — গল্প
+// ======================================
 const storyItems = [
   {
     title: "🐰 গল্প ১: সাহসী খরগোশ ও জাদুর বন",
@@ -138,7 +144,9 @@ const storyItems = [
   }
 ];
 
-// গল্পের তালিকা
+// ======================================
+// গল্পের তালিকা এবং গল্প খোলা
+// ======================================
 function renderStoryList() {
   return `
     <h2>📚 গল্পের জাদুর জগৎ</h2>
@@ -153,11 +161,10 @@ function renderStoryList() {
     </div>
   `;
 }
-
-// নির্দিষ্ট গল্প খোলা
 function openStory(index) {
   const lesson = document.getElementById("lesson");
   const story = storyItems[index];
+
   if (!lesson || !story) return;
 
   lesson.innerHTML = `
@@ -176,53 +183,41 @@ function openStory(index) {
   lesson.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-if (subject === "rhymes") {
-  lesson.innerHTML = `
-    <h2>🎵 বাংলা ছড়ার জগৎ</h2>
-    <p>পছন্দের ছড়াটি বেছে নিয়ে শোনো।</p>
+// ======================================
+// বাংলা ছড়ার তালিকা
+// ======================================
 
+function renderBanglaRhymes() {
+  return `
+    <h2>🎵 বাংলা ছড়ার জগৎ</h2>
+    <p>পছন্দের ছড়াটি বেছে নিয়ে শোনো। 🥰</p>
     ${banglaRhymes.map((rhyme, index) => `
-      <div style="background:#fff;border:2px solid #ffd6e7;
-        border-radius:14px;padding:14px;margin:12px 0;text-align:left">
+      <div style="background:#fff;border:2px solid #ffd6e7;border-radius:14px;padding:14px;margin:12px 0;text-align:left">
         <h3>${index + 1}. ${rhyme.title}</h3>
         <audio controls preload="none" style="width:100%">
           <source src="assets/audio/${rhyme.file}" type="audio/mpeg">
+          তোমার ব্রাউজার অডিও চালাতে পারছে না।
         </audio>
       </div>
     `).join("")}
   `;
-
-  lesson.scrollIntoView({ behavior: "smooth", block: "start" });
-  return;
 }
-
+// ======================================
 // বাংলা, ইংরেজি, গণিত, লেখা, গল্প ও গেম
+// ======================================
+
 function showLesson(subject) {
   const lesson = document.getElementById("lesson");
   if (!lesson) return;
 
-  if (subject === "story")
-if (subject === "rhymes") {
-  lesson.innerHTML = `
-    <h2>🎵 বাংলা ছড়ার জগৎ</h2>
-    <p>পছন্দের ছড়াটি বেছে নিয়ে শোনো। 🥰</p>
-
-    ${banglaRhymes.map((rhyme, index) => `
-      <div style="background:#fff;border:2px solid #ffd6e7;
-        border-radius:14px;padding:14px;margin:12px 0;text-align:left">
-        <h3>${index + 1}. ${rhyme.title}</h3>
-        <audio controls preload="none" style="width:100%">
-          <source src="assets/audio/${rhyme.file}" type="audio/mpeg">
-        </audio>
-      </div>
-    `).join("")}
-  `;
-
-  lesson.scrollIntoView({ behavior: "smooth", block: "start" });
-  return;
-}
-  {
+  if (subject === "story") {
     lesson.innerHTML = renderStoryList();
+    lesson.scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+
+  if (subject === "rhymes") {
+    lesson.innerHTML = renderBanglaRhymes();
     lesson.scrollIntoView({ behavior: "smooth", block: "start" });
     return;
   }
@@ -242,29 +237,44 @@ if (subject === "rhymes") {
         </p>
         <h3>🍎 বর্ণ দিয়ে শব্দ শিখি</h3>
         <p style="font-size:22px;line-height:2">
-          অ — অজগর 🐍<br>আ — আম 🥭<br>ই — ইঁদুর 🐭<br>
-          উ — উট 🐪<br>ক — কলা 🍌<br>গ — গরু 🐄<br>ম — মাছ 🐟
+          অ — অজগর 🐍<br>
+          আ — আম 🥭<br>
+          ই — ইঁদুর 🐭<br>
+          উ — উট 🐪<br>
+          ক — কলা 🍌<br>
+          গ — গরু 🐄<br>
+          ম — মাছ 🐟
         </p>
         <h3>✏️ অনুশীলন</h3>
         <p>নিজে নিজে বলো: অ — অজগর, আ — আম, ক — কলা।</p>
       `
     },
-
     english: {
       title: "🔤 Let's Learn English!",
       content: `
         <h3>🌈 Learn the Alphabet</h3>
         <p style="font-size:26px;line-height:2">
-          A B C D E F G<br>H I J K L M N<br>O P Q R S T U V W X Y Z
+          A B C D E F G<br>
+          H I J K L M N<br>
+          O P Q R S T U V W X Y Z
         </p>
         <h3>🍎 Learn Words</h3>
         <p style="font-size:22px;line-height:2">
-          A — Apple 🍎<br>B — Ball ⚽<br>C — Cat 🐱<br>
-          D — Dog 🐶<br>E — Elephant 🐘<br>F — Fish 🐟<br>G — Grapes 🍇
+          A — Apple 🍎<br>
+          B — Ball ⚽<br>
+          C — Cat 🐱<br>
+          D — Dog 🐶<br>
+          E — Elephant 🐘<br>
+          F — Fish 🐟<br>
+          G — Grapes 🍇
         </p>
         <h3>🔢 Learn Numbers</h3>
         <p style="font-size:24px">
-          One — 1<br>Two — 2<br>Three — 3<br>Four — 4<br>Five — 5
+          One — 1<br>
+          Two — 2<br>
+          Three — 3<br>
+          Four — 4<br>
+          Five — 5
         </p>
         <h3>✏️ Practice</h3>
         <p>Say aloud: A for Apple, B for Ball, C for Cat.</p>
@@ -278,21 +288,30 @@ if (subject === "rhymes") {
         <p style="font-size:28px;line-height:2">১ ২ ৩ ৪ ৫<br>৬ ৭ ৮ ৯ ১০</p>
         <h3>🍎 গুনে দেখো</h3>
         <p style="font-size:22px;line-height:2">
-          🍎 = ১টি আপেল<br>🍎 🍎 = ২টি আপেল<br>🍎 🍎 🍎 = ৩টি আপেল
+          🍎 = ১টি আপেল<br>
+          🍎 🍎 = ২টি আপেল<br>
+          🍎 🍎 🍎 = ৩টি আপেল
         </p>
         <h3>➕ যোগ শিখি</h3>
         <p style="font-size:24px;line-height:2">
-          ১ + ১ = ২<br>২ + ২ = ৪<br>৩ + ২ = ৫<br>৪ + ১ = ৫<br>৫ + ২ = ৭
+          ১ + ১ = ২<br>
+          ২ + ২ = ৪<br>
+          ৩ + ২ = ৫<br>
+          ৪ + ১ = ৫<br>
+          ৫ + ২ = ৭
         </p>
         <h3>➖ বিয়োগ শিখি</h3>
-        <p style="font-size:24px;line-height:2">৩ − ১ = ২<br>৫ − ২ = ৩<br>৪ − ১ = ৩</p>
+        <p style="font-size:24px;line-height:2">
+          ৩ − ১ = ২<br>
+          ৫ − ২ = ৩<br>
+          ৪ − ১ = ৩
+        </p>
         <h3>🔺 আকার চেনো</h3>
         <p style="font-size:24px;line-height:2">⚪ গোলাকার<br>🟥 বর্গাকার<br>🔺 ত্রিভুজ</p>
         <h3>✏️ অনুশীলন</h3>
         <p>নিজে উত্তর দাও: ২ + ৩ = কত?</p>
       `
     },
-
     writing: {
       title: "✍️ চলো লিখতে শিখি",
       content: `
@@ -350,8 +369,10 @@ if (subject === "rhymes") {
     lesson.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
+// ======================================
+// উত্তর যাচাই ও কুইজ
+// ======================================
 
-// সাধারণ উত্তর যাচাই
 function checkAnswer(answer) {
   const result = document.getElementById("answer");
   if (!result) return;
@@ -361,7 +382,6 @@ function checkAnswer(answer) {
     : "😊 আবার চেষ্টা করো!";
 }
 
-// কুইজের উত্তর
 function quizAnswer(button, answer, resultId) {
   const result = document.getElementById(resultId);
   if (!result) return;
@@ -377,7 +397,6 @@ function quizAnswer(button, answer, resultId) {
 
 let childPhotoData = "";
 
-// প্রোফাইল পেজ খোলা
 function openChildProfile() {
   const profilePage = document.getElementById("childProfilePage");
   const home = document.getElementById("homePage");
@@ -392,8 +411,10 @@ function openChildProfile() {
   editChildProfile();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+editChildProfile();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-// প্রোফাইল পেজ বন্ধ
 function closeChildProfile() {
   const profilePage = document.getElementById("childProfilePage");
   const home = document.getElementById("homePage");
@@ -406,7 +427,6 @@ function closeChildProfile() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// জন্মতারিখ থেকে বয়স গণনা
 function calculateChildAge() {
   const dobInput = document.getElementById("childDob");
   const ageText = document.getElementById("childAge");
@@ -445,7 +465,6 @@ function calculateChildAge() {
   if (ageSelect) ageSelect.value = "";
 }
 
-// শিশুর ছবির প্রিভিউ
 function previewChildPhoto(event) {
   const file = event.target.files && event.target.files[0];
   if (!file) return;
@@ -474,7 +493,6 @@ function previewChildPhoto(event) {
         1,
         maxSize / Math.max(image.width, image.height)
       );
-
       canvas.width = Math.max(1, Math.round(image.width * scale));
       canvas.height = Math.max(1, Math.round(image.height * scale));
 
@@ -501,7 +519,6 @@ function previewChildPhoto(event) {
   reader.readAsDataURL(file);
 }
 
-// প্রোফাইল সংরক্ষণ
 function saveChildProfile() {
   const nameInput = document.getElementById("childName");
   const dobInput = document.getElementById("childDob");
@@ -536,6 +553,7 @@ function saveChildProfile() {
     alert("জন্মতারিখ অথবা বয়স নির্বাচন করো।");
     return;
   }
+
   let age = selectedAge ? selectedAge + " বছর" : "";
 
   if (dob) {
@@ -562,7 +580,6 @@ function saveChildProfile() {
     gender,
     photo: childPhotoData
   };
-
   try {
     localStorage.setItem("shikhiKidsChildProfile", JSON.stringify(profile));
     showChildProfile(profile);
@@ -572,7 +589,6 @@ function saveChildProfile() {
   }
 }
 
-// সংরক্ষিত প্রোফাইল দেখানো
 function showChildProfile(profile) {
   const container = document.getElementById("savedChildProfile");
   if (!container || !profile) return;
@@ -594,7 +610,6 @@ function showChildProfile(profile) {
   `;
 }
 
-// প্রোফাইলে লেখা নিরাপদভাবে দেখানো
 function escapeProfileText(value) {
   return String(value || "").replace(/[&<>"']/g, char => ({
     "&": "&amp;",
@@ -605,7 +620,6 @@ function escapeProfileText(value) {
   })[char]);
 }
 
-// সংরক্ষিত তথ্য দিয়ে ফর্ম পূরণ
 function editChildProfile() {
   let profile;
 
@@ -617,7 +631,6 @@ function editChildProfile() {
     alert("সংরক্ষিত প্রোফাইল পড়া যায়নি।");
     return;
   }
-
   if (!profile) return;
 
   const nameInput = document.getElementById("childName");
@@ -651,7 +664,7 @@ function editChildProfile() {
   calculateChildAge();
 }
 
-// অ্যাপ চালু হলে আগের প্রোফাইল দেখানো
+// অ্যাপ চালু হলে সংরক্ষিত প্রোফাইল দেখানো
 (function restoreChildProfile() {
   try {
     const saved = localStorage.getItem("shikhiKidsChildProfile");
@@ -660,32 +673,3 @@ function editChildProfile() {
     console.log("সংরক্ষিত প্রোফাইল পড়তে সমস্যা হয়েছে।");
   }
 })();
-const banglaRhymes = [
-  { title: "হাট্টিমাটিম টিম", file: "hattimatim-tim.mp3" },
-  { title: "আম পাতা জোড়া জোড়া", file: "am-pata-jora-jora.mp3" },
-  { title: "বাংলা ছড়া ৩", file: "bangla-rhyme-03.mp3" },
-  { title: "বাংলা ছড়া ৪", file: "bangla-rhyme-04.mp3" },
-  { title: "বাংলা ছড়া ৫", file: "bangla-rhyme-05.mp3" },
-  { title: "বাংলা ছড়া ৬", file: "bangla-rhyme-06.mp3" },
-  { title: "বাংলা ছড়া ৭", file: "bangla-rhyme-07.mp3" },
-  { title: "বাংলা ছড়া ৮", file: "bangla-rhyme-08.mp3" },
-  { title: "দোল দোল দুলুনি", file: "dol-dol-duluni.mp3" },
-  { title: "আয় ছেলেরা আয় মেয়েরা", file: "ay-chelera-ay-meyera.mp3" }
-];
-
-function renderBanglaRhymes() {
-  return `
-    <h2>🎵 বাংলা ছড়ার জগৎ</h2>
-    <p>পছন্দের ছড়াটি বেছে নিয়ে শোনো।</p>
-    ${banglaRhymes.map((rhyme, index) => `
-      <div style="background:#fff;border:2px solid #ffd6e7;
-        border-radius:14px;padding:14px;margin:12px 0;text-align:left">
-        <h3>${index + 1}. ${rhyme.title}</h3>
-        <audio controls preload="none" style="width:100%">
-          <source src="assets/audio/${rhyme.file}" type="audio/mpeg">
-          তোমার ব্রাউজার অডিও চালাতে পারছে না।
-        </audio>
-      </div>
-    `).join("")}
-  `;
-}
