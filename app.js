@@ -201,7 +201,27 @@ function showLesson(subject) {
   const lesson = document.getElementById("lesson");
   if (!lesson) return;
 
-  if (subject === "story") {
+  if (subject === "story")
+if (subject === "rhymes") {
+  lesson.innerHTML = `
+    <h2>🎵 বাংলা ছড়ার জগৎ</h2>
+    <p>পছন্দের ছড়াটি বেছে নিয়ে শোনো। 🥰</p>
+
+    ${banglaRhymes.map((rhyme, index) => `
+      <div style="background:#fff;border:2px solid #ffd6e7;
+        border-radius:14px;padding:14px;margin:12px 0;text-align:left">
+        <h3>${index + 1}. ${rhyme.title}</h3>
+        <audio controls preload="none" style="width:100%">
+          <source src="assets/audio/${rhyme.file}" type="audio/mpeg">
+        </audio>
+      </div>
+    `).join("")}
+  `;
+
+  lesson.scrollIntoView({ behavior: "smooth", block: "start" });
+  return;
+}
+  {
     lesson.innerHTML = renderStoryList();
     lesson.scrollIntoView({ behavior: "smooth", block: "start" });
     return;
