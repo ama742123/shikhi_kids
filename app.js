@@ -1,4 +1,17 @@
 
+const banglaRhymes = [
+  { title: "হাট্টিমাটিম টিম", file: "hattimatim-tim.mp3" },
+  { title: "আম পাতা জোড়া জোড়া", file: "am-pata-jora-jora.mp3" },
+  { title: "বাংলা ছড়া ৩", file: "bangla-rhyme-03.mp3" },
+  { title: "বাংলা ছড়া ৪", file: "bangla-rhyme-04.mp3" },
+  { title: "বাংলা ছড়া ৫", file: "bangla-rhyme-05.mp3" },
+  { title: "বাংলা ছড়া ৬", file: "bangla-rhyme-06.mp3" },
+  { title: "বাংলা ছড়া ৭", file: "bangla-rhyme-07.mp3" },
+  { title: "বাংলা ছড়া ৮", file: "bangla-rhyme-08.mp3" },
+  { title: "দোল দোল দুলুনি", file: "dol-dol-duluni.mp3" },
+  { title: "আয় ছেলেরা আয় মেয়েরা", file: "ay-chelera-ay-meyera.mp3" }
+];
+
 const storyItems = [
   {
     title: "🐰 গল্প ১: সাহসী খরগোশ ও জাদুর বন",
