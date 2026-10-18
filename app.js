@@ -607,3 +607,32 @@ function editChildProfile() {
     console.log("সংরক্ষিত প্রোফাইল পড়তে সমস্যা হয়েছে।");
   }
 })();
+const banglaRhymes = [
+  { title: "হাট্টিমাটিম টিম", file: "hattimatim-tim.mp3" },
+  { title: "আম পাতা জোড়া জোড়া", file: "am-pata-jora-jora.mp3" },
+  { title: "বাংলা ছড়া ৩", file: "bangla-rhyme-03.mp3" },
+  { title: "বাংলা ছড়া ৪", file: "bangla-rhyme-04.mp3" },
+  { title: "বাংলা ছড়া ৫", file: "bangla-rhyme-05.mp3" },
+  { title: "বাংলা ছড়া ৬", file: "bangla-rhyme-06.mp3" },
+  { title: "বাংলা ছড়া ৭", file: "bangla-rhyme-07.mp3" },
+  { title: "বাংলা ছড়া ৮", file: "bangla-rhyme-08.mp3" },
+  { title: "দোল দোল দুলুনি", file: "dol-dol-duluni.mp3" },
+  { title: "আয় ছেলেরা আয় মেয়েরা", file: "ay-chelera-ay-meyera.mp3" }
+];
+
+function renderBanglaRhymes() {
+  return `
+    <h2>🎵 বাংলা ছড়ার জগৎ</h2>
+    <p>পছন্দের ছড়াটি বেছে নিয়ে শোনো।</p>
+    ${banglaRhymes.map((rhyme, index) => `
+      <div style="background:#fff;border:2px solid #ffd6e7;
+        border-radius:14px;padding:14px;margin:12px 0;text-align:left">
+        <h3>${index + 1}. ${rhyme.title}</h3>
+        <audio controls preload="none" style="width:100%">
+          <source src="assets/audio/${rhyme.file}" type="audio/mpeg">
+          তোমার ব্রাউজার অডিও চালাতে পারছে না।
+        </audio>
+      </div>
+    `).join("")}
+  `;
+}
